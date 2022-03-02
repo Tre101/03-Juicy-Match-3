@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Panda.wav-0105ce5f461d0dd6e5666f41f9bbb5de.sample"
+
+[deps]
+
+source_file="res://Assets/Panda.wav"
+dest_files=[ "res://.import/Panda.wav-0105ce5f461d0dd6e5666f41f9bbb5de.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
