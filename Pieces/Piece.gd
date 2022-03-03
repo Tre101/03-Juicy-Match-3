@@ -4,24 +4,25 @@ export (String) var color
 var is_matched
 var is_counted
 var selected = false
-var target_position = Vector2.ZERO
+var target_position = Vector2(0,0)
 var default_modulate = Color(1,1,1,1)
 var highlight = Color(1,0.8,0,1)
 
 var fall_speed = 1
-var move_speed = 1
 
 var dying = false
+var dying_progress = 0
 
 func _ready():
 	randomize()
+	$Sprite.material = $Sprite.material.duplicate()
 
 func _physics_process(_delta):
-	if dying and not $Tween.is_active():
+	if dying and not $Tween.is_active() and dying_progress >= 1:
 		queue_free()
-	if not dying and target_position != Vector2.ZERO and not $Moving.is_active() and target_position != position:
-		$Moving.interpolate_property(self, "position", position, target_position, move_speed, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
-		$Moving.start()
+	if dying:
+		dying_progress += .01
+		$Sprite.material.set_shader_param("progress", dying_progress)
 	if selected:
 		$Selected.emitting = true
 		$Select.show()
@@ -34,9 +35,8 @@ func _physics_process(_delta):
 
 func move_piece(change):
 	target_position = position + change
-	
-func move_piece_to(change):
 	position = target_position
+	
 	
 func die():
 	dying = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Grid/grid.gd" type="Script" id=1]
 [ext_resource path="res://Pieces/Piece Background.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Assets/Hippo.wav" type="AudioStream" id=13]
 [ext_resource path="res://Assets/Rabbit.wav" type="AudioStream" id=14]
 [ext_resource path="res://UI/Instructions.gd" type="Script" id=15]
+[ext_resource path="res://Assets/backgroundColorGrass.png" type="Texture" id=16]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -26,7 +27,17 @@ font_data = ExtResource( 4 )
 size = 42
 font_data = ExtResource( 4 )
 
+[sub_resource type="Environment" id=3]
+background_mode = 4
+glow_enabled = true
+
 [node name="Game" type="Node2D"]
+
+[node name="Background_Container" type="Node2D" parent="."]
+
+[node name="Background" type="Sprite" parent="Background_Container"]
+texture = ExtResource( 16 )
+centered = false
 
 [node name="grid" type="Node2D" parent="."]
 script = ExtResource( 1 )
@@ -162,6 +173,9 @@ volume_db = 1.25
 [node name="Snake" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 volume_db = 5.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 3 )
 
 [connection signal="timeout" from="grid/Bonus" to="grid" method="_on_Bonus_timeout"]
 [connection signal="timeout" from="HUD/Timer" to="HUD" method="_on_Timer_timeout"]

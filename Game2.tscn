@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Assets/Bangers-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Pieces/Piece Background.tscn" type="PackedScene" id=2]
@@ -15,6 +15,8 @@
 [ext_resource path="res://Assets/Hippo.wav" type="AudioStream" id=13]
 [ext_resource path="res://Assets/Elephant.wav" type="AudioStream" id=14]
 [ext_resource path="res://UI/Instructions.gd" type="Script" id=15]
+[ext_resource path="res://Assets/backgroundColorForest.png" type="Texture" id=16]
+[ext_resource path="res://UI/Background_Container.gd" type="Script" id=17]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -26,7 +28,18 @@ font_data = ExtResource( 1 )
 size = 42
 font_data = ExtResource( 1 )
 
+[sub_resource type="Environment" id=3]
+background_mode = 4
+glow_enabled = true
+
 [node name="Game" type="Node2D"]
+
+[node name="Background_Container" type="Node2D" parent="."]
+script = ExtResource( 17 )
+
+[node name="Background" type="Sprite" parent="Background_Container"]
+texture = ExtResource( 16 )
+centered = false
 
 [node name="grid" type="Node2D" parent="."]
 script = ExtResource( 4 )
@@ -68,6 +81,8 @@ __meta__ = {
 
 [node name="Timer" type="Timer" parent="HUD"]
 autostart = true
+
+[node name="Bonus" type="Node2D" parent="HUD"]
 
 [node name="Instructions" type="Control" parent="HUD"]
 pause_mode = 2
@@ -123,7 +138,7 @@ script = ExtResource( 3 )
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
-volume_db = 0.5
+volume_db = 0.1
 autoplay = true
 
 [node name="Elephant" type="AudioStreamPlayer" parent="."]
@@ -156,6 +171,9 @@ volume_db = 1.25
 [node name="Snake" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 volume_db = 5.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 3 )
 
 [connection signal="timeout" from="HUD/Timer" to="HUD" method="_on_Timer_timeout"]
 [connection signal="timeout" from="HUD/Instructions/Countdown" to="HUD/Instructions" method="_on_Countdown_timeout"]

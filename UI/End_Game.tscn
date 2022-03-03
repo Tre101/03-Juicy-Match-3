@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Bangers-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://UI/End_Game.gd" type="Script" id=2]
+[ext_resource path="res://Assets/backgroundDesert.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Never Surrender.ogg" type="AudioStream" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 45
@@ -19,10 +21,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Node2D"]
+texture = ExtResource( 3 )
+centered = false
+
 [node name="Background" type="ColorRect" parent="."]
 margin_right = 576.0
 margin_bottom = 1024.0
-color = Color( 0, 0, 0, 1 )
+color = Color( 0, 0, 0, 0.584314 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -66,6 +74,10 @@ text = "Quit"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+autoplay = true
 
 [connection signal="pressed" from="Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
